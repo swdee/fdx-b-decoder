@@ -15,4 +15,8 @@ git clone https://github.com/swdee/fdx-b-decoder.git fdx-b
 Start DSView and select `FDX-B` as the decoder.
 
 
+## Decoding
 
+Screenshot of decoded transponder tag.
+
+![Transponder Decoded](dsview-fdx-b-sample.png?raw=true)
