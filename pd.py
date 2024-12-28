@@ -319,7 +319,11 @@ class Decoder(srd.Decoder):
 
             counter += 1
 
-            width = self.samplenum - self.lastSamplenum
+            # Calculate pulse width in samples
+            width_samples = self.samplenum - self.lastSamplenum
+
+            # Convert width to time in microseconds
+            width = (width_samples / self.samplerate) * 1e6
 
             # ignore the first edge as it could be partial
             if counter > 1:
