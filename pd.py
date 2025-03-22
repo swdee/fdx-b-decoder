@@ -346,9 +346,3 @@ class Decoder(srd.Decoder):
 
             self.lastLastSampleNum = self.lastSamplenum
             self.lastSamplenum = self.samplenum
-
-            # break for development
-            #if counter > 260:
-            #    break
-
-
