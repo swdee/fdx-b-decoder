@@ -195,7 +195,7 @@ class Decoder(srd.Decoder):
 
     # CRC16 CCITT Kermit implementation
     def crc16(self, data: bytearray, offset, length):
-        if data is None or offset < 0 or offset > len(data) - 1 and offset + length > len(data):
+        if data is None or offset < 0 or offset > len(data) - 1 or offset + length > len(data):
             return 0
         crc = 0
         for i in range(0, length):
