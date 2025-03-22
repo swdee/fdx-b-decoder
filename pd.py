@@ -141,7 +141,7 @@ class Decoder(srd.Decoder):
 
         countryCode = int(bits, base=2)
 
-        self.tagID = "%d%d" % (countryCode , nationalCode)
+        self.tagID = "%03d%012d" % (countryCode , nationalCode)
 
         self.put(self.telegram[NATIONAL_CODE_START_POSITION][1], self.telegram[COUNTRY_CODE_END_POSITION][2],self.out_ann,
                  [9,["Tag ID: %s" % self.tagID, "ID: %s" % self.tagID]])
@@ -195,7 +195,7 @@ class Decoder(srd.Decoder):
 
     # CRC16 CCITT Kermit implementation
     def crc16(self, data: bytearray, offset, length):
-        if data is None or offset < 0 or offset > len(data) - 1 and offset + length > len(data):
+        if data is None or offset < 0 or offset > len(data) - 1 or offset + length > len(data):
             return 0
         crc = 0
         for i in range(0, length):
@@ -346,9 +346,3 @@ class Decoder(srd.Decoder):
 
             self.lastLastSampleNum = self.lastSamplenum
             self.lastSamplenum = self.samplenum
-
-            # break for development
-            #if counter > 260:
-            #    break
-
-
