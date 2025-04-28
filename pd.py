@@ -328,7 +328,9 @@ class Decoder(srd.Decoder):
 
             # ignore the first edge as it could be partial
             if counter > 1:
-                if width > 0.9 * MODULATION_WIDTH and width < 1.62 * MODULATION_WIDTH:
+                if width > MODULATION_WIDTH * 2:
+                    self.endTelegram = True
+                elif width > 0.9 * MODULATION_WIDTH and width < 1.62 * MODULATION_WIDTH:
                    self.foundFirstOne = True
                    self.put(self.lastSamplenum, self.samplenum, self.out_ann, [0, ["1"]])
                    self.add_to_telegram("1", self.lastSamplenum, self.samplenum)
