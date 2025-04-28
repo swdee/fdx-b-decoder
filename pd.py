@@ -245,12 +245,12 @@ class Decoder(srd.Decoder):
 
             # draw extra data block
             if teleIdx == EXTRA_DATA_END_POSITION:
-				if self.hasExtraData:
-                	self.put(self.telegram[EXTRA_DATA_START_POSITION][1], self.telegram[EXTRA_DATA_START_POSITION+8][1], self.out_ann,
+                if self.hasExtraData:
+                    self.put(self.telegram[EXTRA_DATA_START_POSITION][1], self.telegram[EXTRA_DATA_START_POSITION+8][1], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
-                	self.put(self.telegram[EXTRA_DATA_START_POSITION+9][1], self.telegram[EXTRA_DATA_START_POSITION+17][1], self.out_ann,
+                    self.put(self.telegram[EXTRA_DATA_START_POSITION+9][1], self.telegram[EXTRA_DATA_START_POSITION+17][1], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
-                	self.put(self.telegram[EXTRA_DATA_START_POSITION+18][1], self.telegram[teleIdx][2], self.out_ann,
+                    self.put(self.telegram[EXTRA_DATA_START_POSITION+18][1], self.telegram[teleIdx][2], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
                 self.endTelegram = True
 
@@ -331,11 +331,11 @@ class Decoder(srd.Decoder):
                 if width > MODULATION_WIDTH * 2:
                     self.endTelegram = True
                 elif width > 0.9 * MODULATION_WIDTH and width < 1.62 * MODULATION_WIDTH:
-					self.foundFirstOne = True
-					self.put(self.lastSamplenum, self.samplenum, self.out_ann, [0, ["1"]])
-					self.add_to_telegram("1", self.lastSamplenum, self.samplenum)
-					self.lastWidth = 0
-                elif (width + self.lastWidth) > 0.9 * MODULATION_WIDTH and (width + self.lastWidth) < 1.62 * MODULATION_WIDTH: and self.foundFirstOne:
+                    self.foundFirstOne = True
+                    self.put(self.lastSamplenum, self.samplenum, self.out_ann, [0, ["1"]])
+                    self.add_to_telegram("1", self.lastSamplenum, self.samplenum)
+                    self.lastWidth = 0
+                elif (width + self.lastWidth) > 0.9 * MODULATION_WIDTH and (width + self.lastWidth) < 1.62 * MODULATION_WIDTH and self.foundFirstOne:
                     self.put(self.lastLastSampleNum, self.samplenum, self.out_ann, [0, ["0"]])
                     self.add_to_telegram("0", self.lastLastSampleNum, self.samplenum)
                     self.lastWidth = 0
