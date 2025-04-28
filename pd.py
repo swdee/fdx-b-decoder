@@ -244,12 +244,13 @@ class Decoder(srd.Decoder):
                 self.calc_checksum()
 
             # draw extra data block
-            if teleIdx == EXTRA_DATA_END_POSITION and self.hasExtraData:
-                self.put(self.telegram[EXTRA_DATA_START_POSITION][1], self.telegram[EXTRA_DATA_START_POSITION+8][1], self.out_ann,
+            if teleIdx == EXTRA_DATA_END_POSITION:
+				if self.hasExtraData:
+                	self.put(self.telegram[EXTRA_DATA_START_POSITION][1], self.telegram[EXTRA_DATA_START_POSITION+8][1], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
-                self.put(self.telegram[EXTRA_DATA_START_POSITION+9][1], self.telegram[EXTRA_DATA_START_POSITION+17][1], self.out_ann,
+                	self.put(self.telegram[EXTRA_DATA_START_POSITION+9][1], self.telegram[EXTRA_DATA_START_POSITION+17][1], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
-                self.put(self.telegram[EXTRA_DATA_START_POSITION+18][1], self.telegram[teleIdx][2], self.out_ann,
+                	self.put(self.telegram[EXTRA_DATA_START_POSITION+18][1], self.telegram[teleIdx][2], self.out_ann,
                          [6, ["Application Data", "App Data", "X"]])
                 self.endTelegram = True
 
